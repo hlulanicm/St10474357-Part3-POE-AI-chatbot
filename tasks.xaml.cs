@@ -2,11 +2,8 @@ using System.Windows;
 
 namespace Chatbot
 {
-    public  class  Chatbot
+    public partial class tasks : Window
     {
 
-
-      
-     
     }
 }

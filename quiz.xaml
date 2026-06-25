@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="CyberBot Quiz" Height="650" Width="750"
         WindowStartupLocation="CenterScreen"
-        Background="white">
+        Background="#0D1B2A">
 
     <Window.Resources>
         <Style x:Key="QuizBtn" TargetType="Button">
@@ -34,23 +34,17 @@
     </Window.Resources>
 
     <Grid Margin="24">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="77*"/>
-            <ColumnDefinition Width="157*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="65.04"/>
-            <RowDefinition Height="20.183"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="343*"/>
-            <RowDefinition Height="66*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Border Grid.Row="0" Background="#2E3CA3" CornerRadius="8" Padding="16,12" Margin="0,0,0,16" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        <Border Grid.Row="0" Background="#1A3A5C" CornerRadius="8" Padding="16,12" Margin="0,0,0,16">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -74,13 +68,13 @@
         </Border>
 
         <!-- Progress Bar -->
-        <ProgressBar Grid.Row="2" x:Name="progress_bar"
+        <ProgressBar Grid.Row="1" x:Name="progress_bar"
                      Height="8" Minimum="0" Maximum="10" Value="0"
                      Background="#112233" Foreground="#2255AA"
-                     Margin="0,23,0,38" BorderThickness="0" Grid.ColumnSpan="2"/>
+                     Margin="0,0,0,16" BorderThickness="0"/>
 
         <!-- Question -->
-        <Border Grid.Row="2" Background="#112233" CornerRadius="8" Padding="20,16" Margin="0,24,0,12" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        <Border Grid.Row="2" Background="#112233" CornerRadius="8" Padding="20,16" Margin="0,0,0,12">
             <TextBlock x:Name="lbl_question"
                        Text="Loading question..."
                        FontFamily="Segoe UI Semibold"
@@ -91,7 +85,7 @@
         </Border>
 
         <!-- Answer Buttons -->
-        <StackPanel Grid.Row="4" x:Name="answers_panel" Margin="0,22,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <StackPanel Grid.Row="3" x:Name="answers_panel">
             <Button x:Name="btn_a" Style="{StaticResource QuizBtn}" Click="Answer_Click" Tag="0"/>
             <Button x:Name="btn_b" Style="{StaticResource QuizBtn}" Click="Answer_Click" Tag="1"/>
             <Button x:Name="btn_c" Style="{StaticResource QuizBtn}" Click="Answer_Click" Tag="2"/>
@@ -99,8 +93,8 @@
         </StackPanel>
 
         <!-- Feedback -->
-        <Border Grid.Row="6" x:Name="feedback_border" CornerRadius="8"
-                Padding="16,10" Margin="0,12,0,-12" Visibility="Collapsed" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <Border Grid.Row="4" x:Name="feedback_border" CornerRadius="8"
+                Padding="16,10" Margin="0,12,0,0" Visibility="Collapsed">
             <TextBlock x:Name="lbl_feedback"
                        FontFamily="Segoe UI Semibold"
                        FontSize="14"
@@ -109,14 +103,14 @@
         </Border>
 
         <!-- Next Button -->
-        <Button Grid.Row="7" x:Name="btn_next"
+        <Button Grid.Row="5" x:Name="btn_next"
                 Content="Next Question"
                 Style="{StaticResource QuizBtn}"
                 Background="#1A5C3A"
                 Width="200"
                 HorizontalAlignment="Right"
-                Margin="0,12,0,-60"
+                Margin="0,12,0,0"
                 Visibility="Collapsed"
-                Click="Next_Click" Grid.Column="1"/>
+                Click="Next_Click"/>
     </Grid>
 </Window>

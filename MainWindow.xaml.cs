@@ -1,4 +1,4 @@
-using ai_response;
+ï»¿using ai_response;
 using System;
 using System.Collections;
 //importing all necessarry tools
@@ -29,16 +29,6 @@ namespace Chatbot
     //this is the GUI code and how the GUI will operate and handle all user responses
     public partial class MainWindow : Window
     {
-
-
-
-        //creating a new instance for the class
-
-        user_tasks Manage_tasks = new user_tasks();
-
-   
-
-
 
         //Creating an arrayList for both the replies and the ignore assets
         ArrayList reply = new ArrayList();
@@ -150,10 +140,7 @@ namespace Chatbot
             show_message(username, rawQuestion);
             question.Clear();
 
-            // FIX (duplicate bug): auto_show_interest MUST come after ai_check so the
-            // reminder bubble appears below the answer, not above it. More importantly,
-            // auto_show_interest now only shows a reminder — it never calls ai_check —
-            // so there is no risk of re-processing saved interests as new queries.
+
             ai_check(cleaned);
             auto_show_interest();
         }
@@ -256,7 +243,7 @@ namespace Chatbot
             string interests = tracker.GetInterests(username);
             if (string.IsNullOrWhiteSpace(interests)) return;
 
-            // Only show the reminder — do NOT call ai_check() again.
+            // Only show the reminder â€” do NOT call ai_check() again.
             // Calling ai_check() here caused all saved interest topics to be re-answered
             // every second message, producing duplicate bubbles (e.g. 2FA appearing twice).
             show_message("CyberBot", "Just a reminder, you are interested in: " + interests);

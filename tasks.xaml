@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Task Manager" Height="600" Width="750"
         WindowStartupLocation="CenterScreen"
-        Background="Azure">
+        Background="#1C1085">
 
     <Window.Resources>
         <Style x:Key="CyberBtn" TargetType="Button">
-            <Setter Property="Background" Value="#1A3A5C"/>
+            <Setter Property="Background" Value="green"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
             <Setter Property="FontSize" Value="13"/>
@@ -31,7 +31,7 @@
         </Style>
 
         <Style x:Key="InputStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#2255AA"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -41,7 +41,7 @@
         </Style>
 
         <Style x:Key="LabelStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#AACCFF"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Margin" Value="0,8,0,3"/>
@@ -57,17 +57,17 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Border Grid.Row="0" Background="#2E3CA3" CornerRadius="2" Padding="16,12" Margin="0,0,0,16">
+        <Border Grid.Row="0" Background="#0E0869" CornerRadius="8" Padding="16,12" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock Text="Task Manager" FontFamily="Segoe UI Black"
-                           FontSize="22" Foreground="white"/>
+                           FontSize="22" Foreground="White"/>
                 <TextBlock Text="Manage your cybersecurity tasks"
-                           FontFamily="Segoe UI" FontSize="12" Foreground="black"/>
+                           FontFamily="Segoe UI" FontSize="12" Foreground="#AACCFF"/>
             </StackPanel>
         </Border>
 
         <!-- Add Task Form -->
-        <Border Grid.Row="1" Background="#AACCFF" CornerRadius="3" Padding="16" Margin="0,0,0,12">
+        <Border Grid.Row="1" Background="#0E0869" CornerRadius="8" Padding="16" Margin="0,0,0,12">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -80,9 +80,12 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Task Name" Style="{StaticResource LabelStyle}" Grid.ColumnSpan="2" Margin="10,3,182,8"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Description" Style="{StaticResource LabelStyle}" Margin="8,8,0,3"/>
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="Reminder Date (YYYY-MM-DD)" Style="{StaticResource LabelStyle}" Margin="8,8,0,0" Height="16" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Task Name"
+                           Style="{StaticResource LabelStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Description"
+                           Style="{StaticResource LabelStyle}" Margin="8,8,0,3"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Reminder Date (YYYY-MM-DD)"
+                           Style="{StaticResource LabelStyle}" Margin="8,8,0,3"/>
 
                 <TextBox Grid.Row="1" Grid.Column="0" x:Name="txt_taskName"
                          Style="{StaticResource InputStyle}" Margin="0,0,8,0"/>
@@ -96,13 +99,13 @@
             </Grid>
         </Border>
 
-        <!-- Task List -->
-        <Border Grid.Row="2" Background="#112233" CornerRadius="8" Padding="8">
+        <!-- Task List  styles universal -->
+        <Border Grid.Row="2" Background="#0E0869" CornerRadius="8" Padding="8">
             <DataGrid x:Name="tasks_grid"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       CanUserDeleteRows="False"
-                      Background="#112233"
+                      Background="#0E0869"
                       Foreground="White"
                       BorderThickness="0"
                       GridLinesVisibility="Horizontal"
@@ -111,7 +114,7 @@
                       AlternatingRowBackground="#112233"
                       HeadersVisibility="Column"
                       SelectionMode="Single"
-                      SelectionUnit="FullRow">
+                      SelectionUnit="FullRow" SelectionChanged="tasks_grid_SelectionChanged">
 
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
@@ -135,14 +138,15 @@
 
         <!-- Action Buttons -->
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
-            <Button Content="Mark Completed" Style="{StaticResource CyberBtn}"
+            <Button Content=" Completed" Style="{StaticResource CyberBtn}"
                     Width="140" Margin="0,0,10,0" Click="Complete_Click"
-                    Background="#1A5C3A"/>
+                    Background="#00C94B"/>
             <Button Content="Delete Task" Style="{StaticResource CyberBtn}"
                     Width="120" Margin="0,0,10,0" Click="Delete_Click"
                     Background="#8B0000"/>
             <Button Content="Refresh" Style="{StaticResource CyberBtn}"
-                    Width="100" Click="Refresh_Click"/>
+                    Width="100" Click="Refresh_Click"
+                     Background="#000000"/>
         </StackPanel>
     </Grid>
 </Window>
