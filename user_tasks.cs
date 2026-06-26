@@ -21,10 +21,10 @@ namespace Chatbot
         private string taskConn =
             @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=tasks_DB;Integrated Security=True;";
 
-        // ─────────────────────────────────────────────────────────────────────
-        // AUTO-SETUP  –  Call once from MainWindow constructor
+
+        //   Call from MainWindow constructor
         // Creates the database and table if they do not already exist
-        // ─────────────────────────────────────────────────────────────────────
+
         public void initialize_database()
         {
             try
@@ -63,10 +63,7 @@ namespace Chatbot
                     "DB setup error: " + ex.Message, "Database Error");
             }
         }
-
-        // ─────────────────────────────────────────────────────────────────────
-        // CREATE  –  Add a new task
-        // ─────────────────────────────────────────────────────────────────────
+//create a new task and allow the user to input the details of the task 
         public string add_task(string name, string description, string date)
         {
             try
@@ -92,9 +89,9 @@ namespace Chatbot
             }
         }
 
-        // ─────────────────────────────────────────────────────────────────────
+
         // READ  –  Get all tasks
-        // ─────────────────────────────────────────────────────────────────────
+
         public List<TaskItem> get_all_tasks()
         {
             List<TaskItem> tasks = new List<TaskItem>();
@@ -110,7 +107,9 @@ namespace Chatbot
                         tasks.Add(new TaskItem
                         {
                             TaskId     = reader.GetInt32(0),
+
                             TaskName   = reader.GetString(1),
+
                             Description = reader.IsDBNull(2) ? "" : reader.GetString(2),
                             TaskDate   = reader.IsDBNull(3) ? "" : reader.GetString(3),
                             TaskStatus = reader.IsDBNull(4) ? "Pending" : reader.GetString(4)
@@ -135,16 +134,18 @@ namespace Chatbot
                 using (SqlConnection conn = new SqlConnection(taskConn))
                 {
                     conn.Open();
-                    string sql = "UPDATE all_tasks SET task_status = 'Completed' WHERE task_id = @id;";
+              
+                    string sql = "UPDATE all_tasks SET task_status = 'Completed' WHERE task_id = @id;";//Update the task in the database when the task is complete
+                  
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", taskId);
                     cmd.ExecuteNonQuery();
                 }
-                return "Task marked as completed.";
+                return "Task marked as completed.";//Display and appropriate message 
             }
             catch (Exception ex)
             {
-                return "Error completing task: " + ex.Message;
+                return "Error completing task: " + ex.Message; //In the event of a mishap display an appropriate message 
             }
         }
 
@@ -156,7 +157,9 @@ namespace Chatbot
                 using (SqlConnection conn = new SqlConnection(taskConn))
                 {
                     conn.Open();
-                    string sql = "DELETE FROM all_tasks WHERE task_id = @id;";
+                  
+                    string sql = "DELETE FROM all_tasks WHERE task_id = @id;";//SQL deletion from database pending user input
+                 
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", taskId);
                     cmd.ExecuteNonQuery();
@@ -169,19 +172,16 @@ namespace Chatbot
             }
         }
 
- 
-        // NLP  –  Parse natural language task commands from the chatbot
-        //
-        // Recognised patterns (flexible, not rigid):
 
-        //   add task / remind me / create task / set reminder
-        //   view tasks / show tasks / list tasks / my tasks
+        /// <summary>
+        /// An NLP (Natural Language Processing) simulation can mean a few different things depending on the context—ranging from how AI models are trained to how businesses test conversational systems.
 
-        //   complete task X / mark X done / finished X
-        //   delete task X / remove task X
+        /// </summary>
+       ///
+
 
         // Returns a human-readable response string.
-    
+
         public string nlp_task_command(string input)
         {
             string lower = input.ToLower().Trim();
@@ -210,7 +210,7 @@ namespace Chatbot
                 return add_task(taskName, description, date);
             }
 
-            // ── VIEW ─────────────────────────────────────────────────────────
+            //  VIEW task
             if (ContainsAny(lower, new[] {
                     "view task", "show task", "list task", "my task",
                     "see task", "display task", "what task", "all task",
@@ -226,7 +226,7 @@ namespace Chatbot
                 return result;
             }
 
-            // ── COMPLETE ─────────────────────────────────────────────────────
+            // COMPLETE task
             if (ContainsAny(lower, new[] {
                     "complete task", "mark task", "finished task",
                     "done task", "task done", "completed task",
@@ -249,12 +249,10 @@ namespace Chatbot
                 return delete_task(id);
             }
 
-            return null; // Not a task command — let main chatbot handle it
+            return null; 
         }
 
-        // ─────────────────────────────────────────────────────────────────────
-        // HELPERS
-        // ─────────────────────────────────────────────────────────────────────
+
         private bool ContainsAny(string input, string[] keywords)
         {
             foreach (string kw in keywords)
@@ -300,9 +298,7 @@ namespace Chatbot
             return "";
         }
 
-        // ─────────────────────────────────────────────────────────────────────
-        // Legacy test method (kept so existing references don't break)
-        // ─────────────────────────────────────────────────────────────────────
+        //Connection test for seamless error handling 
         public void test_connection()
         {
             try
